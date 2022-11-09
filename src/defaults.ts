@@ -49,4 +49,3 @@ const getDefaultRanges = (date: Date): DefinedRange[] => [
 ];
 
 export const defaultRanges = getDefaultRanges(new Date());
-

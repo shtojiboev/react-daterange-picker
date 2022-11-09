@@ -41,6 +41,8 @@ interface DateRangePickerProps {
 	definedRanges?: DefinedRange[];
 	minDate?: Date | string;
 	maxDate?: Date | string;
+	weekDays?: string[];
+	months?: string[];
 	onChange: (dateRange: DateRange) => void;
 }
 
@@ -48,6 +50,8 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
 	const today = new Date();
 
 	const {
+		weekDays,
+		months,
 		open,
 		onChange,
 		initialDateRange,
@@ -152,6 +156,8 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
 
 	return open ? (
 		<Menu
+			weekDays={weekDays}
+			months={months}
 			dateRange={dateRange}
 			minDate={minDateValid}
 			maxDate={maxDateValid}

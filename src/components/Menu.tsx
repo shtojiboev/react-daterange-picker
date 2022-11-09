@@ -38,6 +38,8 @@ interface MenuProps extends WithStyles<typeof styles> {
 	maxDate: Date;
 	firstMonth: Date;
 	secondMonth: Date;
+	weekDays?: string[];
+	months?: string[];
 	setFirstMonth: Setter<Date>;
 	setSecondMonth: Setter<Date>;
 	setDateRange: Setter<DateRange>;
@@ -53,6 +55,8 @@ interface MenuProps extends WithStyles<typeof styles> {
 
 const Menu: React.FunctionComponent<MenuProps> = props => {
 	const {
+		weekDays,
+		months,
 		classes,
 		ranges,
 		dateRange,
@@ -68,27 +72,11 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
 	} = props;
 	const { startDate, endDate } = dateRange;
 	const canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
-	const commonProps = { dateRange, minDate, maxDate, helpers, handlers };
+	const commonProps = { dateRange, minDate, maxDate, helpers, handlers, weekDays, months };
 	return (
 		<Paper elevation={5} square>
 			<Grid container direction="row" wrap="nowrap">
 				<Grid>
-					<Grid container className={classes.header} alignItems="center">
-						<Grid item className={classes.headerItem}>
-							<Typography variant="subtitle1">
-								{startDate ? format(startDate, "mmmm dd, yyyy") : "Start Date"}
-							</Typography>
-						</Grid>
-						<Grid item className={classes.headerItem}>
-							<ArrowRightAlt color="action" />
-						</Grid>
-						<Grid item className={classes.headerItem}>
-							<Typography variant="subtitle1">
-								{endDate ? format(endDate, "mmmm dd, yyyy") : "End Date"}
-							</Typography>
-						</Grid>
-					</Grid>
-					<Divider />
 					<Grid container direction="row" justify="center" wrap="nowrap">
 						<Month
 							{...commonProps}

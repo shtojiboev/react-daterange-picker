@@ -43,6 +43,8 @@ const styles = (theme: Theme) =>
 
 interface MonthProps extends WithStyles<typeof styles> {
 	value: Date;
+	weekDays?: string[];
+	months?: string[];
 	marker: symbol;
 	dateRange: DateRange;
 	minDate: Date;
@@ -61,6 +63,8 @@ interface MonthProps extends WithStyles<typeof styles> {
 
 const Month: React.FunctionComponent<MonthProps> = props => {
 	const {
+		weekDays = WEEK_DAYS,
+		months,
 		classes,
 		helpers,
 		handlers,
@@ -81,6 +85,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
 					setDate={setDate}
 					nextDisabled={!forward}
 					prevDisabled={!back}
+					months={months}
 					onClickPrevious={() =>
 						handlers.onMonthNavigate(marker, NavigationAction.Previous)
 					}
@@ -93,7 +98,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
 					direction="row"
 					justify="space-between"
 					className={classes.weekDaysContainer}>
-					{WEEK_DAYS.map(day => (
+					{weekDays.map(day => (
 						<Typography color="textSecondary" key={day} variant="caption">
 							{day}
 						</Typography>

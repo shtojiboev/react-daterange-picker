@@ -14,6 +14,7 @@ import { setMonth, getMonth, setYear, getYear } from "date-fns";
 
 interface HeaderProps extends WithStyles<typeof styles> {
 	date: Date;
+	months?: string[];
 	setDate: (date: Date) => void;
 	nextDisabled: boolean;
 	prevDisabled: boolean;
@@ -61,6 +62,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 	setDate,
 	nextDisabled,
 	prevDisabled,
+	months = MONTHS,
 	onClickNext,
 	onClickPrevious
 }) => {
@@ -87,7 +89,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 					value={getMonth(date)}
 					onChange={handleMonthChange}
 					MenuProps={{ disablePortal: true }}>
-					{MONTHS.map((month, idx) => (
+					{months.map((month, idx) => (
 						<MenuItem key={month} value={idx}>
 							{month}
 						</MenuItem>
